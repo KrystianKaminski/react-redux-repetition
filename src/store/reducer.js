@@ -33,6 +33,12 @@ const reducer = (state = initialState, action) => {
                     value: state.counter
                 })
             }
+        case 'DELETE_RESULT':
+            const updatedArray = state.results.filter(result => result.id !== action.resultElId)
+            return {
+                ...state,
+                results: updatedArray
+            }
         default:
             return state
     }
