@@ -9,16 +9,16 @@ class Counter extends Component {
     render() {
         return (
             <div>
-                <CounterOutput value={this.props._counter} />
-                <CounterControl label="Increment" clicked={this.props._onIncrementCounter} />
-                <CounterControl label="Decrement" clicked={this.props._onDecrementCounter} />
-                <CounterControl label="Add 5" clicked={this.props._add5Counter} />
-                <CounterControl label="Subtract 5" clicked={this.props._subtract5Counter} />
+                <CounterOutput value={this.props.ctr} />
+                <CounterControl label="Increment" clicked={this.props.onIncrementCounter} />
+                <CounterControl label="Decrement" clicked={this.props.onDecrementCounter} />
+                <CounterControl label="Add 10" clicked={this.props.onAddCounter} />
+                <CounterControl label="Subtract 15" clicked={this.props.onSubtractCounter} />
                 <hr />
-                <button onClick={this.props._onStoreResult}>Store Result</button>
+                <button onClick={() => this.props.onStoreResult(this.props.ctr)}>Store Result</button>
                 <ul>
-                    {this.props._storedResults.map(strResult => (
-                        <li key={strResult.id} onClick={() => this.props._onDeleteResult(strResult.id)}>{strResult.value}</li>
+                    {this.props.storedResults.map(strResult => (
+                        <li key={strResult.id} onClick={() => this.props.onDeleteResult(strResult.id)}>{strResult.value}</li>
                     ))}
                 </ul>
             </div>
@@ -28,21 +28,21 @@ class Counter extends Component {
 
 const mapStateToProps = state => {
     return {
-        _counter: state.counter,
-        _storedResults: state.results
+        ctr: state.ctr.counter,
+        storedResults: state.res.results
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        _onIncrementCounter: () => dispatch({ type: actionTypes.INCREMENT }),
-        _onDecrementCounter: () => dispatch({ type: actionTypes.DECREMENT }),
-        _add5Counter: () => dispatch({ type: actionTypes.ADD_5, val: 5 }),
-        _subtract5Counter: () => dispatch({ type: actionTypes.SUBTRACT_5, val: 5 }),
-        _onStoreResult: () => dispatch({ type: actionTypes.STORE_RESULT, }),
-        _onDeleteResult: (id) => dispatch({ type: actionTypes.DELETE_RESULT, resultElId: id }),
+        onIncrementCounter: () => dispatch({ type: actionTypes.INCREMENT }),
+        onDecrementCounter: () => dispatch({ type: actionTypes.DECREMENT }),
+        onAddCounter: () => dispatch({ type: actionTypes.ADD_5, val: 10 }),
+        onSubtractCounter: () => dispatch({ type: actionTypes.SUBTRACT_5, val: 15 }),
+        onStoreResult: (result) => dispatch({ type: actionTypes.STORE_RESULT, result: result }),
+        onDeleteResult: (id) => dispatch({ type: actionTypes.DELETE_RESULT, resultElId: id })
     }
-}
+};
 
 export default connect(
     mapStateToProps, mapDispatchToProps
