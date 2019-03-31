@@ -5,29 +5,6 @@ import CounterControl from '../../components/CounterControl/CounterControl';
 import CounterOutput from '../../components/CounterOutput/CounterOutput';
 
 class Counter extends Component {
-    state = {
-        counter: 0
-    }
-
-    counterChangedHandler = (action, value) => {
-        switch (action) {
-            case 'inc':
-                this.setState((prevState) => { return { counter: prevState.counter + 1 } })
-                break;
-            case 'dec':
-                this.setState((prevState) => { return { counter: prevState.counter - 1 } })
-                break;
-            case 'add':
-                this.setState((prevState) => { return { counter: prevState.counter + value } })
-                break;
-            case 'sub':
-                this.setState((prevState) => { return { counter: prevState.counter - value } })
-                break;
-            default:
-                console.log('as')
-        }
-    }
-
     render() {
         return (
             <div>
@@ -51,8 +28,8 @@ const mapDispatchToProps = dispatch => {
     return {
         _onIncrementCounter: () => dispatch({ type: 'INCREMENT' }),
         _onDecrementCounter: () => dispatch({ type: 'DECREMENT' }),
-        _add5Counter: () => dispatch({ type: 'ADD_5' }),
-        _subtract5Counter: () => dispatch({ type: 'SUBTRACT_5' }),
+        _add5Counter: () => dispatch({ type: 'ADD_5', val: 5 }),
+        _subtract5Counter: () => dispatch({ type: 'SUBTRACT_5', val: 5 }),
     }
 }
 
